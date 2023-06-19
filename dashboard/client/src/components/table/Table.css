@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.addBtn{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    margin: 20px 0 0 70px;
+    padding: 10px 20px;
+    font-size: 17px;
+    border-radius: 3px;
+    border-style: none;
+
+}
+
+.table{
+    margin: 0 auto 50px auto;
+    width: 90%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th{
+    background-color: #36304A;
+    padding: 12px;
+    color: aliceblue;
+    text-align: start;
+}
+
+tr{
+    background-color: #F5F5F5;
+}
+
+tr:hover{
+background-color: #ece9ee;
+cursor: pointer;
+}
+
+td{
+    padding: 10px;
+    text-align: start;
+}
+
+th, td{
+    padding-left: 30px;
+    text-transform: capitalize;
+}
+
+.deleteBtn, .editBtn{
+    padding: 6px 10px;
+    background-color: transparent;
+    border-style: 1px solid #36304A;
+    cursor: pointer;
+}

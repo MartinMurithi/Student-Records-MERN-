@@ -1,0 +1,22 @@
+body{
+  background-color: #8054C8;
+    font-family: sans-serif;
+    background:  url("https://gdb.voanews.com/5729012c-f133-4589-8962-0db0b5063fd1_w1080_h608_s.jpg");
+    background-repeat: no-repeat;
+    object-fit: cover;
+    background-size: cover;
+    height: 100%;
+}
+
+.App {
+  text-align: center;
+}
+
+.title{
+  margin: 20px 0 20px 0;
+  color: aliceblue;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
