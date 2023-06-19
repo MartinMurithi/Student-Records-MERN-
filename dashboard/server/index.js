@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 const { logger } = require("./middleware/logger");
-const PORT = 8080;
+const PORT = process.env.PORT || 5500;
 require("dotenv").config();
 
 const app = express();
