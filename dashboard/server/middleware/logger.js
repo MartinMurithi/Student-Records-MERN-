@@ -6,7 +6,7 @@ const { format } = require("date-fns");
 
 const logEvents = async (message, logFileName) => {
     const dateTime = `${format(new Date(), 'yyyy-MM-dd\tHH:mm:ss')}`;
-    const logItem = `${uuid()}\t${dateTime}\t${message}`;
+    const logItem = `${uuid()}\t${dateTime}\t${message}\n`;
 
     if (!fs.existsSync(path.join(__dirname, '..', 'logs'))) {
         await fsPromises.mkdir(path.join(__dirname, '..', 'logs'));
@@ -20,4 +20,4 @@ const logger = (req, res, next) => {
     next();
 }
 
-module.exports = { logger };
+module.exports = { logEvents, logger};

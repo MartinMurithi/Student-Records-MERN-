@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 const { logger } = require("./middleware/logger");
-const PORT = process.env.PORT || 5500;
+const errorHandler = require("./middleware/errorHandler");
 require("dotenv").config();
+const PORT = process.env.PORT || 5500;
 
 const app = express();
 mongoose.connect(process.env.MONGODB_CONNECTION_URI);
@@ -25,6 +26,8 @@ app.all("*", (req, res) => {
     res.type("text").send("Resource does not exist");
   }
 });
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log("Server is listening on port " + PORT);
