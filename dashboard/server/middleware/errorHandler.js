@@ -6,7 +6,7 @@ const errorHandler = (err, req, res, next) => {
     "errLog.log"
   );
   console.log(err.stack);
-  const errStatus = err.statusCode || 500;
+  const errStatus = err.status || 500;
   const errMessage = err.message || "Something went wrong";
   res.status(errStatus).json({
     success: false,
