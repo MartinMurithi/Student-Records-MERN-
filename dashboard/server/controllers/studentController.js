@@ -1,17 +1,29 @@
-const express = require("express");
-const router = express.Router();
 const studentModel = require("../models/student");
 
-router.get("/spaceX/api/allStudents", async(req, res) => {
+// Create the functions which will process data
+
+// Create student
+const createStudent = async (req, res) => {
+  try {
+    const newStudent = await studentModel.create(req.body);
+    res.json(newStudent);
+  } catch (err) {
+    res.json(err);
+  }
+};
+
+// Get all students data
+const getAllStudents = async (req, res) => {
   try {
     const studentsData = await studentModel.find({});
     res.json(studentsData);
   } catch (error) {
     res.json(error);
   }
-});
+};
 
-router.get("/spaceX/api/student/:id", async (req, res) => {
+// Get one student
+const getOneStudent = async (req, res) => {
   try {
     const id = req.params.id;
     const student = await studentModel.findById({ _id: id });
@@ -19,9 +31,10 @@ router.get("/spaceX/api/student/:id", async (req, res) => {
   } catch (err) {
     res.json(err);
   }
-})
+};
 
-router.put("/spaceX/api/updateStudent/:id", async (req, res) => {
+// Update student data
+const updateStudentData = async (req, res) => {
   try {
     const id = req.params.id;
     const newStudent = await studentModel.findByIdAndUpdate(
@@ -39,19 +52,10 @@ router.put("/spaceX/api/updateStudent/:id", async (req, res) => {
   } catch (err) {
     res.json(err);
   }
-});
+};
 
-
-router.post("/spaceX/api/newStudent", async (req, res) => {
-  try {
-    const newStudent = await studentModel.create(req.body);
-    res.json(newStudent);
-  } catch (err) {
-    res.json(err);
-  }
-});
-
-router.delete("/spaceX/api/deleteStudent/:id", async (req, res) => {
+// Delete student data
+const deleteStudent = async (req, res) => {
   try {
     const id = req.params.id;
     const student = await studentModel.findByIdAndDelete({ _id: id });
@@ -59,7 +63,6 @@ router.delete("/spaceX/api/deleteStudent/:id", async (req, res) => {
   } catch (err) {
     res.json(err);
   }
-});
+};
 
-
-module.exports = router;
+module.exports = { createStudent, getAllStudents, getOneStudent, updateStudentData, deleteStudent };

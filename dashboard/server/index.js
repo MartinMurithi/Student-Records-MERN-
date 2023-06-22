@@ -3,19 +3,19 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
-const { logger } = require("./middleware/logger");
+const { logger, logEvents } = require("./middleware/logger");
 const errorHandler = require("./middleware/errorHandler");
-
+const dbConnect = require("./config/dbConnect");
 const PORT = process.env.PORT || 5500;
 
 const app = express();
-mongoose.connect(process.env.MONGODB_CONNECTION_URI);
+dbConnect();
 
 app.use(logger);
 app.use(cors());
 app.use(express.json());
 app.use("/", express.static(path.join(__dirname, "public")));
-app.use("/", require("./routes/router"));
+app.use("/", require("./routes/studentsRoute"));
 
 app.all("*", (req, res) => {
   res.status(404);
@@ -30,6 +30,13 @@ app.all("*", (req, res) => {
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log("Server is listening on port " + PORT);
+// create a listener for the db connection and error
+mongoose.connection.once('open', () => {
+  console.log("Successfully connected to mongoDB");
+  app.listen(PORT, () => console.log("Server is listening on port " + PORT));
+});
+
+mongoose.connection.on('error', (err) => {
+  console.log(err);
+  logEvents(`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`, 'mongoDBErrorLog.log');
 });
